@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:usercontrols="clr-namespace:WPFDemo.UserControls">
+    <!-- General separation between controls. -->
+    <!-- The following statements are exactly the same. -->
+    <!-- XAML has a fixed convention of Left,Top,Right,Bottom. -->
+    <!-- DO NOT confuse this with CSS convention, i.e. Top,Right,Bottom,Left. -->
+    <Thickness x:Key="TopMarginSeparation">0,5,0,0</Thickness>
+    <!--<Thickness x:Key="TopMarginSeparation" Left="0" Top="5" Right="0" Bottom="0"/>-->
+
+    <!-- Template can be shared across different styles. -->
+    <!-- Line 13-30 is exactly the same as Line 32-54. -->
+    <!--<ControlTemplate TargetType="usercontrols:UserControlBase" x:Key="UserControlTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" FontWeight="Bold">
+                <TextBlock Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
+                           TextDecorations="Underline"/>
+            </Label>
+            <Grid Grid.Row="1">
+                <ContentPresenter/>
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+    <Style TargetType="usercontrols:UserControlBase" x:Key="LabelledUserControl">
+        <Setter Property="Template" Value="{StaticResource UserControlTemplate}"/>
+    </Style>-->
+
+    <Style TargetType="{x:Type usercontrols:UserControlBase}" x:Key="LabelledUserControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                  <!-- No warning will be given on missing target type, it will just be silent and not work! -->  
+                  <!-- Ridiculously annoying! --> 
+                <ControlTemplate TargetType="{x:Type usercontrols:UserControlBase}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" FontWeight="Bold">
+                            <TextBlock Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
+                                       TextDecorations="Underline"/>
+                        </Label>
+                        <Grid Grid.Row="1">
+                            <ContentPresenter/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
