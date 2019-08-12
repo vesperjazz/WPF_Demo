@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="UserControls\SynchronousAndAsynchronousControl\SynchronousAndAsynchronousViewModel.cs" />
     <Compile Include="UserControls\UserControlBase.cs" />
+    <Compile Include="UserControls\UserControlInfo.cs" />
     <Compile Include="Windows\PersonInfoWindow.xaml.cs">
       <DependentUpon>PersonInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -173,6 +174,9 @@
       <Project>{f116ad82-4f7e-4eba-9f64-b17669a5bf87}</Project>
       <Name>WPFDemo.Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Converters\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

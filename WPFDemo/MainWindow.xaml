@@ -3,12 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFDemo"
+        xmlns:uc="clr-namespace:WPFDemo.UserControls"
         xmlns:bbc="clr-namespace:WPFDemo.UserControls.BasicBindingControl"
         xmlns:ccbc="clr-namespace:WPFDemo.UserControls.CommandsAndCodeBehindControl"
         xmlns:sac="clr-namespace:WPFDemo.UserControls.SynchronousAndAsynchronousControl"
         xmlns:occ="clr-namespace:WPFDemo.UserControls.ObservableCollectionControl"
-        xmlns:customcontrols="clr-namespace:WPFDemo.CustomControls;assembly=WPFDemo.CustomControls"
         mc:Ignorable="d"
         Title="WPF Basic Demo" Height="600" Width="850" Background="Azure" ResizeMode="NoResize">
     <Grid Margin="10">
@@ -29,7 +28,8 @@
         
         <bbc:BasicBinding Grid.Row="0" Grid.ColumnSpan="2"
                           Style="{StaticResource LabelledUserControl}"
-                          UserControlTitle="Basic Binding"
+                          UserControlTitle="{x:Static uc:UserControlInfo.BasicBinding}"
+                          UserControlDescriptions="{x:Static uc:UserControlInfo.BasicBindingDescriptions}"
                           DataContext="{Binding Model.PersonInfo}" 
                           AddPersonButtonClicked="BasicBinding_AddPersonButtonClicked"/>
         <Separator Grid.Row="1" Grid.ColumnSpan="2" 
@@ -37,14 +37,16 @@
 
         <ccbc:CommandsAndCodeBehind Grid.Row="2" Grid.ColumnSpan="2"
                                     Style="{StaticResource LabelledUserControl}"
-                                    UserControlTitle="Commands and Code Behind"
+                                    UserControlTitle="{x:Static uc:UserControlInfo.CommandsAndCodeBehind}"
+                                    UserControlDescriptions="{x:Static uc:UserControlInfo.CommandsAndCodeBehindDescriptions}"
                                     DataContext="{Binding CommandsAndCodeBehindViewModel}"/>
         <Separator Grid.Row="3" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 
         <occ:ObservableCollection Grid.Row="4" Grid.ColumnSpan="2"
                                   Style="{StaticResource LabelledUserControl}"
-                                  UserControlTitle="Observable Collection and Generic Collection"
+                                  UserControlTitle="{x:Static uc:UserControlInfo.ObservableAndGenericCollection}"
+                                  UserControlDescriptions="{x:Static uc:UserControlInfo.ObservableAndGenericCollectionDescriptions}"
                                   DataContext="{Binding ObservableCollectionViewModel}"/>
         <Separator Grid.Row="5" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
@@ -52,7 +54,8 @@
         <!-- https://social.msdn.microsoft.com/Forums/vstudio/en-US/a430ab1f-b02f-40d1-ada4-b39f033cb3b4/binding-to-a-user-control-dependency-property?forum=wpf -->
         <sac:SynchronousAndAsynchronous Grid.Row="6" Grid.ColumnSpan="2"
                                         Style="{StaticResource LabelledUserControl}"
-                                        UserControlTitle="Synchronous and Asynchronous"
+                                        UserControlTitle="{x:Static uc:UserControlInfo.SynchronousAndAsynchronous}"
+                                        UserControlDescriptions="{x:Static uc:UserControlInfo.SynchronousAndAsynchronousDescriptions}"
                                         DataContext="{Binding SynchronousAndAsynchronousViewModel}"
                                         MaximumProgressBar="100"
                                         IsTaskCancellable="{Binding DataContext.Model.IsUserControlTaskCancellable, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}"/>

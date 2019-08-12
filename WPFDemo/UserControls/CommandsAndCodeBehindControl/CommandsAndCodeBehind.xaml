@@ -18,22 +18,15 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--<DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
-                   Margin="{StaticResource TopMarginSeparation}">-->
-            <!--<Label Content="Full Information:"/>-->
-            <!--<TextBlock Name="LastNameTxtBlock"
-                       VerticalAlignment="Center"
-                       FontWeight="Bold"
-                       Text="{Binding PersonInfo.FullName, FallbackValue='Fallback Text'}" />-->
         <pidc:PersonInfoDisplay Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" 
                                 DataContext="{Binding PersonInfo}"
                                 Margin="{StaticResource LeftTopMarginSeparation}"/>
-        <!--</DockPanel>-->
         <Button Grid.Row="0" Grid.Column="2" 
                 Margin="{StaticResource TopMarginSeparation}"
                 Name="BtnShowFullInfoCommand" 
                 Command="{Binding UpdateFullInformationCommand}"
                 Content="Show Person by Command" />
+        
         <Button Grid.Row="0" Grid.Column="3" 
                 Margin="{StaticResource LeftTopMarginSeparation}"
                 Name="BtnShowFullInfo"

@@ -45,12 +45,17 @@
             </DataGrid.Columns>
         </DataGrid>
         
+        <!-- For the sake of demonstration, the Scroll is disabled to prevent the application from crashing. -->
+        <!-- An InvalidOperationException will be thrown with the message "An ItemsControl is inconsistent with its items source." -->
+        <!-- A generic list should never be bound to a DataGrid. -->
         <!-- The only difference between the upper DataGrid and this DataGrid is the ItemsSource. -->
         <!-- Copy paste the exact same DataGrid from above? Or is there a better way? -->
         <DataGrid Grid.Column="2" 
                   Style="{StaticResource DataGridStyle}" 
                   ItemsSource="{Binding PersonInfoList}"
-                  AlternatingRowBackground="AliceBlue">
+                  AlternatingRowBackground="AliceBlue"
+                  VerticalScrollBarVisibility="Disabled"
+                  ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="65">
                     <DataGridTemplateColumn.HeaderTemplate>

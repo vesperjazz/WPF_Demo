@@ -75,7 +75,7 @@ namespace WPFDemo.UserControls.SynchronousAndAsynchronousControl
             for (var i = 0; i <= MaximumProgressBar; i++)
             {
                 PrgsBr.Value += 1;
-                await Task.Delay(100);
+                await PerformIOTaskAsync();
             }
             EndTask();
             SetApplicationState(ApplicationState.Default);
@@ -94,7 +94,7 @@ namespace WPFDemo.UserControls.SynchronousAndAsynchronousControl
                     _cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
                     PrgsBr.Value += 1;
-                    await Task.Delay(100, _cancellationTokenSource.Token);
+                    await PerformIOTaskAsync(_cancellationTokenSource.Token);
                 }
             }
             catch (TaskCanceledException tcex)
@@ -136,6 +136,14 @@ namespace WPFDemo.UserControls.SynchronousAndAsynchronousControl
         {
             _cancellationTokenSource.Dispose();
             _cancellationTokenSource = new CancellationTokenSource();
+        }
+
+        private async Task PerformIOTaskAsync(CancellationToken? cancellationToken = null)
+        {
+            if (cancellationToken.HasValue)
+                await Task.Delay(100, cancellationToken.Value);
+            else
+                await Task.Delay(100);
         }
     }
 }

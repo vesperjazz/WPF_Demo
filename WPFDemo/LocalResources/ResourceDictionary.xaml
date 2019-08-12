@@ -8,42 +8,92 @@
     <Thickness x:Key="TopMarginSeparation">0,5,0,0</Thickness>
     <!--<Thickness x:Key="TopMarginSeparation" Left="0" Top="5" Right="0" Bottom="0"/>-->
 
+    <Style x:Key="HelpToolTipStyle" TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+        <Setter Property="HasDropShadow" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel Margin="5">
+                            <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5"
+                                       Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
+                                       TextDecorations="Underline"/>
+                            <ListView Background="Transparent" 
+                                      BorderThickness="0"
+                                      ItemsSource="{Binding UserControlDescriptions, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!-- Template can be shared across different styles. -->
-    <!-- Line 13-30 is exactly the same as Line 32-54. -->
-    <!--<ControlTemplate TargetType="usercontrols:UserControlBase" x:Key="UserControlTemplate">
+    <!-- Line 33-60 is exactly the same as Line 62-97. -->
+    <!--<ControlTemplate TargetType="usercontrols:UserControlBase" x:Key="UserControlBaseTemplate">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" FontWeight="Bold">
-                <TextBlock Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
-                           TextDecorations="Underline"/>
-            </Label>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Image Height="20" Width="20" 
+                       VerticalAlignment="Center"
+                       Source="/WPFDemo.Resources;Component/Images/Help_24.png"
+                       ToolTipService.ShowDuration="100000">
+                    <Image.ToolTip>
+                        <ToolTip Style="{StaticResource HelpToolTipStyle}"/>
+                    </Image.ToolTip>
+                </Image>
+                <Label FontWeight="Bold" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
+                               TextDecorations="Underline"/>
+                </Label>
+            </StackPanel>
             <Grid Grid.Row="1">
                 <ContentPresenter/>
             </Grid>
         </Grid>
     </ControlTemplate>
     <Style TargetType="usercontrols:UserControlBase" x:Key="LabelledUserControl">
-        <Setter Property="Template" Value="{StaticResource UserControlTemplate}"/>
+        <Setter Property="Template" Value="{StaticResource UserControlBaseTemplate}"/>
     </Style>-->
 
     <Style TargetType="{x:Type usercontrols:UserControlBase}" x:Key="LabelledUserControl">
         <Setter Property="Template">
             <Setter.Value>
-                  <!-- No warning will be given on missing target type, it will just be silent and not work! -->  
-                  <!-- Ridiculously annoying! -->
+                 <!-- No warning will be given on missing target type, it will just be silent and not work! 
+                     Ridiculously annoying! --> 
                 <ControlTemplate TargetType="{x:Type usercontrols:UserControlBase}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" FontWeight="Bold">
-                            <TextBlock Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
-                                       TextDecorations="Underline"/>
-                        </Label>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Image Height="20" Width="20" 
+                                   VerticalAlignment="Center"
+                                   Source="/WPFDemo.Resources;Component/Images/Help_24.png"
+                                   ToolTipService.ShowDuration="100000">
+                                <Image.ToolTip>
+                                    <ToolTip Style="{StaticResource HelpToolTipStyle}"/>
+                                </Image.ToolTip>
+                            </Image>
+                            <Label FontWeight="Bold" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding UserControlTitle, RelativeSource={RelativeSource AncestorType=usercontrols:UserControlBase}}" 
+                                           TextDecorations="Underline"/>
+                            </Label>
+                        </StackPanel>
                         <Grid Grid.Row="1">
                             <ContentPresenter/>
                             <!-- Exactly the same as ContentPresenter, except it will not compile without 

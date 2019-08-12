@@ -9,6 +9,8 @@
                               mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
+            <!-- All styles that are defined within the context of this Grid, can only be used in this Grid. -->
+            <!-- If a global style is to be shared at application level, take a look at App.xaml. -->
             <!-- If a key is provided on the style resource, explicit referral by the controls is required to apply the styling. -->
             <!-- If no key is provided, all ComboBox within this Grid will have its style applied with this. -->
             <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
@@ -61,12 +63,15 @@
         <Label Grid.Row="0" Grid.Column="3" 
                Content="Last Name: "
                Margin="{StaticResource TopMarginSeparation}"/>
+        <!-- Note the additional Path assignment for LastName, but not FirstName, it's optional. -->
+        <!-- There are times when it's not optional, best practice is to include them all the time. -->
+        <!-- As can be seen, I have not included them, do what I say, don't do what I do. -->
         <TextBox Grid.Row="0" Grid.Column="4"
                  Name="LastNameTxtBox" 
                  MaxLength="15"
                  Margin="{StaticResource TopMarginSeparation}"
                  Style="{StaticResource ErrorTextBoxStyle}"
-                 Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True}">
+                 Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, NotifyOnValidationError=True}">
             <!-- The following is exactly the same as above, just a different way of defining. -->
             <!--<TextBox.Text>
                 <Binding Path="LastName" 
