@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace WPFDemo
 {
@@ -14,6 +16,11 @@ namespace WPFDemo
             InitializeComponent();
             _viewModel = new MainWindowViewModel();
             DataContext = _viewModel;
+        }
+
+        private void BasicBinding_AddPersonButtonClicked(object sender, RoutedEventArgs e)
+        {
+            _viewModel.AddPersonToTable();
         }
     }
 }

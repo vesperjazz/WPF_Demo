@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WPFDemo.Models
+namespace WPFDemo.Domain.Models
 {
     public class Job
     {

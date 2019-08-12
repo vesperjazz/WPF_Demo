@@ -1,5 +1,5 @@
 ﻿using System;
-using WPFDemo.Models;
+using WPFDemo.Domain.Models;
 
 namespace WPFDemo.UserControls.SynchronousAndAsynchronousControl
 {

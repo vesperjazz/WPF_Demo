@@ -13,7 +13,7 @@
     <!--<ControlTemplate TargetType="usercontrols:UserControlBase" x:Key="UserControlTemplate">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" FontWeight="Bold">
@@ -33,11 +33,11 @@
         <Setter Property="Template">
             <Setter.Value>
                   <!-- No warning will be given on missing target type, it will just be silent and not work! -->  
-                  <!-- Ridiculously annoying! --> 
+                  <!-- Ridiculously annoying! -->
                 <ControlTemplate TargetType="{x:Type usercontrols:UserControlBase}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" FontWeight="Bold">
@@ -46,6 +46,9 @@
                         </Label>
                         <Grid Grid.Row="1">
                             <ContentPresenter/>
+                            <!-- Exactly the same as ContentPresenter, except it will not compile without 
+                                 TargetType defined in ControlTemplate above. -->
+                            <!--<ContentControl Content="{TemplateBinding Content}"/>-->
                         </Grid>
                     </Grid>
                 </ControlTemplate>

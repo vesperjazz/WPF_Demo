@@ -65,7 +65,7 @@
             </Label>
             <Button Grid.Row="0" Grid.Column="1"
                     Name="BtnClearProgressBar" 
-                    Height="25" Margin="10,0,0,0"
+                    Margin="10,0,0,0"
                     IsEnabled="{Binding IsTaskCancellable, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBooleanConverter}}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top"
@@ -76,7 +76,6 @@
         <Button Grid.Row="0" Grid.Column="2" 
                 Name="BtnSynchronousTask"
                 Margin="{StaticResource TopMarginSeparation}"
-                Height="25"
                 IsEnabled="{Binding IsTaskCancellable, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBooleanConverter}}"
                 Content="Simulate Synchronous Long Running Task" 
                 Click="BtnSynchronousTask_Click"/>
@@ -84,7 +83,6 @@
         <Button Grid.Row="1" Grid.Column="2"
                 Name="BtnAsynchronousTask"
                 Margin="{StaticResource TopMarginSeparation}"
-                Height="25"
                 IsEnabled="{Binding IsTaskCancellable, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBooleanConverter}}"
                 Content="Simulate Asynchronous Long Running Task"
                 Click="BtnAsynchronousTask_Click"/>
@@ -92,7 +90,6 @@
         <DockPanel Grid.Row="2" Grid.Column="2" 
                    Margin="{StaticResource TopMarginSeparation}">
             <Button Name="BtnAsychronousCancelTask" 
-                    Height="25"
                     IsEnabled="{Binding IsTaskCancellable, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBooleanConverter}}"
                     Content="Simulate Asynchronous Long Running Task"
                     Click="BtnAsychronousCancelTask_Click"/>

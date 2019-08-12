@@ -8,14 +8,16 @@
         xmlns:ccbc="clr-namespace:WPFDemo.UserControls.CommandsAndCodeBehindControl"
         xmlns:sac="clr-namespace:WPFDemo.UserControls.SynchronousAndAsynchronousControl"
         xmlns:occ="clr-namespace:WPFDemo.UserControls.ObservableCollectionControl"
+        xmlns:customcontrols="clr-namespace:WPFDemo.CustomControls;assembly=WPFDemo.CustomControls"
         mc:Ignorable="d"
-        Title="WPF Basic Demo" Height="550" Width="730" Background="Azure" ResizeMode="NoResize">
+        Title="WPF Basic Demo" Height="600" Width="850" Background="Azure" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="305"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,7 +30,8 @@
         <bbc:BasicBinding Grid.Row="0" Grid.ColumnSpan="2"
                           Style="{StaticResource LabelledUserControl}"
                           UserControlTitle="Basic Binding"
-                          DataContext="{Binding Model.PersonInfo}"/>
+                          DataContext="{Binding Model.PersonInfo}" 
+                          AddPersonButtonClicked="BasicBinding_AddPersonButtonClicked"/>
         <Separator Grid.Row="1" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 

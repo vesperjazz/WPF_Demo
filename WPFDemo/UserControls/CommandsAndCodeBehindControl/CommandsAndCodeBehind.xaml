@@ -4,39 +4,55 @@
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:pidc="clr-namespace:WPFDemo.UserControls.PersonInfoDisplayControl"
                               mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                   Margin="{StaticResource TopMarginSeparation}">
-            <Label Content="Full Information:"/>
-            <TextBlock Name="LastNameTxtBlock"
+        <!--<DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                   Margin="{StaticResource TopMarginSeparation}">-->
+            <!--<Label Content="Full Information:"/>-->
+            <!--<TextBlock Name="LastNameTxtBlock"
                        VerticalAlignment="Center"
                        FontWeight="Bold"
-                       Text="{Binding PersonInfo.FullName, FallbackValue='Fallback Text'}" />
-        </DockPanel>
-        <Button Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
+                       Text="{Binding PersonInfo.FullName, FallbackValue='Fallback Text'}" />-->
+        <pidc:PersonInfoDisplay Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" 
+                                DataContext="{Binding PersonInfo}"
+                                Margin="{StaticResource LeftTopMarginSeparation}"/>
+        <!--</DockPanel>-->
+        <Button Grid.Row="0" Grid.Column="2" 
                 Margin="{StaticResource TopMarginSeparation}"
                 Name="BtnShowFullInfoCommand" 
-                Height="25"
-                Command="{Binding UpdateFullNameCommand}"
-                CommandParameter="{Binding}"
-                Content="See information by Command" />
-        <Button Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"
-                Margin="{StaticResource TopMarginSeparation}"
+                Command="{Binding UpdateFullInformationCommand}"
+                Content="Show Person by Command" />
+        <Button Grid.Row="0" Grid.Column="3" 
+                Margin="{StaticResource LeftTopMarginSeparation}"
                 Name="BtnShowFullInfo"
-                Height="25"
                 IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                Content="See information by Code Behind" 
+                Content="Show Person by Code Behind" 
                 Click="BtnShowFullInfo_Click"/>
+
+        <Button Grid.Row="1" Grid.Column="2" 
+                Margin="{StaticResource TopMarginSeparation}"
+                Name="BtnOpenWindow"
+                IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="Open Window"
+                Click="BtnOpenWindow_Click"/>
+
+        <Button Grid.Row="1" Grid.Column="3" 
+                Margin="{StaticResource LeftTopMarginSeparation}"
+                Name="BtnOpenDialog"
+                IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="Open Dialog"
+                Click="BtnOpenDialog_Click"/>
     </Grid>
 </usercontrols:UserControlBase>

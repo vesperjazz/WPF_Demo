@@ -1,44 +1,32 @@
 ﻿using System;
 using System.Windows.Input;
-using WPFDemo.Models;
+using WPFDemo.Domain.Models;
 
 namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 {
-    public class CommandsAndCodeBehindViewModel
+    public class CommandsAndCodeBehindViewModel : NotifyPropertyChangedBase
     {
-        public ICommand UpdateFullNameCommand { get; }
-        public ICommand ClearNameCommand { get; }
+        public ICommand UpdateFullInformationCommand { get; }
 
         public PersonInfo PersonInfo { get; }
 
         public CommandsAndCodeBehindViewModel(PersonInfo personInfo)
         {
             PersonInfo = personInfo ?? throw new ArgumentNullException(nameof(personInfo));
-            UpdateFullNameCommand = new RelayCommand((obj) => UpdateFullName(DateTime.Now), UpdateFullNameCanExecute);
-            ClearNameCommand = new RelayCommand((obj) => ClearName(), ClearNameCanExecute);
+            UpdateFullInformationCommand = new RelayCommand(UpdateFullInformation, UpdateFullInformationCanExecute);
         }
 
-        public void UpdateFullName(DateTime generatedDateTime)
+        public void UpdateFullInformation(object param)
         {
-            PersonInfo.FullName = $"{PersonInfo.FirstName} {PersonInfo.LastName} @ {generatedDateTime.ToString("dd-MMM-yy hh:mm:ss")}";
+            UpdateUI(PersonInfo, nameof(PersonInfo.FullName));
+            UpdateUI(PersonInfo, nameof(PersonInfo.SelectedGender));
+            UpdateUI(PersonInfo, nameof(PersonInfo.DateOfBirth));
+            UpdateUI(PersonInfo, nameof(PersonInfo.SelectedJob));
         }
 
-        public bool UpdateFullNameCanExecute(object param = null)
+        public bool UpdateFullInformationCanExecute(object param)
         {
-            return !string.IsNullOrWhiteSpace(PersonInfo.FirstName) &&
-                !string.IsNullOrWhiteSpace(PersonInfo.LastName);
-        }
-
-        public void ClearName()
-        {
-            PersonInfo.FirstName = string.Empty;
-            PersonInfo.LastName = string.Empty;
-        }
-
-        public bool ClearNameCanExecute(object param)
-        {
-            return !string.IsNullOrWhiteSpace(PersonInfo.FirstName) &&
-                !string.IsNullOrWhiteSpace(PersonInfo.LastName);
+            return PersonInfo.IsReady;
         }
     }
 }

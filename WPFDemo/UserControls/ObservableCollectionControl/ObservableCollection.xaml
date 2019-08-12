@@ -4,27 +4,9 @@
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:customcontrols="clr-namespace:WPFDemo.CustomControls;assembly=WPFDemo.CustomControls"
                               mc:Ignorable="d" 
                               d:DesignHeight="450" d:DesignWidth="800">
-    <usercontrols:UserControlBase.Resources>
-        <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type DataGridCell}">
-                        <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center" 
-                                              HorizontalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="{x:Type DataGrid}">
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-            <Setter Property="IsReadOnly" Value="True"/>
-        </Style>
-    </usercontrols:UserControlBase.Resources>
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -32,16 +14,20 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <DataGrid Grid.Column="0" 
-                  BorderThickness="1,1,1,1"
-                  HorizontalGridLinesBrush="Blue"
-                  VerticalGridLinesBrush="Blue"
-                  GridLinesVisibility="All"
-                  ItemsSource="{Binding PersonInfoObservableCollection}">
+                  Style="{StaticResource DataGridStyle}" 
+                  ItemsSource="{Binding PersonInfoObservableCollection}"
+                  AlternatingRowBackground="AliceBlue">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="To Delete">
+                <DataGridTemplateColumn Width="65">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete All" Margin="0,2,0,2" Height="20"
+                                    Command="{Binding DataContext.DeleteAllObservablePersonCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete" Margin="2" 
+                            <Button Content="Delete" Margin="3,2,3,2" Height="20"
                                     CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     Command="{Binding DataContext.DeleteObservablePersonCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                         </DataTemplate>
@@ -49,17 +35,33 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" CellStyle="{StaticResource DataGridCellStyle}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" CellStyle="{StaticResource DataGridCellStyle}"/>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding SelectedJob.Description}" CellStyle="{StaticResource DataGridCellStyle}" Width="*"/>
-
+                <DataGridTextColumn Header="Gender" Binding="{Binding SelectedGender}" CellStyle="{StaticResource DataGridCellStyle}"/>
+                <!-- It is advisable to always set the last column's width to * as to fill up the remaining space of the grid. -->
+                <DataGridTextColumn Header="Job" 
+                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" 
+                                    Binding="{Binding SelectedJob.Description}" 
+                                    CellStyle="{StaticResource DataGridCellStyle}" 
+                                    Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <!-- The only difference between the upper DataGrid and this DataGrid is the ItemsSource. -->
+        <!-- Copy paste the exact same DataGrid from above? Or is there a better way? -->
         <DataGrid Grid.Column="2" 
-                  ItemsSource="{Binding PersonInfoList}">
+                  Style="{StaticResource DataGridStyle}" 
+                  ItemsSource="{Binding PersonInfoList}"
+                  AlternatingRowBackground="AliceBlue">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="To Delete">
+                <DataGridTemplateColumn Width="65">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete All" Margin="0,2,0,2" Height="20"
+                                    Command="{Binding DataContext.DeleteAllPersonCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete" Margin="2"
+                            <Button Content="Delete" Margin="3,2,3,2" Height="20"
                                     CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     Command="{Binding DataContext.DeletePersonCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                         </DataTemplate>
@@ -67,9 +69,18 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" CellStyle="{StaticResource DataGridCellStyle}"/>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" CellStyle="{StaticResource DataGridCellStyle}"/>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding SelectedJob.Description}" CellStyle="{StaticResource DataGridCellStyle}" Width="*"/>
-
+                <DataGridTextColumn Header="Gender" Binding="{Binding SelectedGender}" CellStyle="{StaticResource DataGridCellStyle}"/>
+                <DataGridTextColumn Header="Job" 
+                                    HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" 
+                                    Binding="{Binding SelectedJob.Description}" 
+                                    CellStyle="{StaticResource DataGridCellStyle}" 
+                                    Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <!--<customcontrols:PersonInfoDataGrid Grid.Column="2" 
+                                           ItemsSource="{Binding PersonInfoObservableCollection}"
+                                           DeletePersonClicked="PersonInfoDataGrid_DeletePersonClick"
+                                           DeleteAllPersonsClicked="PersonInfoDataGrid_DeleteAllPersonsClicked"/>-->
     </Grid>
 </usercontrols:UserControlBase>
