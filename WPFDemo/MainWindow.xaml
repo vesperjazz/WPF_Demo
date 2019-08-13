@@ -24,8 +24,6 @@
             <RowDefinition Height="Auto"/> <!-- Row 4 -->
             <RowDefinition Height="Auto"/> <!-- Row 5 -->
             <RowDefinition Height="Auto"/> <!-- Row 6 -->
-            <RowDefinition Height="Auto"/> <!-- Row 7 -->
-            <RowDefinition Height="Auto"/> <!-- Row 8 -->
         </Grid.RowDefinitions>
         
         <!-- Self-defined UserControl -->
@@ -64,14 +62,5 @@
                                         DataContext="{Binding SynchronousAndAsynchronousViewModel}"
                                         MaximumProgressBar="100"
                                         IsTaskCancellable="{Binding DataContext.Model.IsUserControlTaskCancellable, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}"/>
-        <Separator Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" 
-                   Margin="{StaticResource TopMarginSeparation}"/>
-
-        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" 
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontWeight="Bold"
-                   Margin="{StaticResource TopMarginSeparation}"
-                   Text="Copyright © 2018 Ivan Chin. All Rights Reserved." />
     </Grid>
 </Window>
