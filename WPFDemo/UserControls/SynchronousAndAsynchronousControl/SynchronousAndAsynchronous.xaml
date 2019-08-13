@@ -54,7 +54,10 @@
                                     <Setter Property="Text" Value="UI thread is busy, try dragging the window or click on any controls..." />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ApplicationState, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="Responsive">
-                                    <Setter Property="Text" Value="UI thread is free, try dragging the window or click on any controls..." />
+                                    <Setter Property="Text" Value="UI thread is free and task CANNOT be cancelled, try dragging the window or click on any controls..." />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ApplicationState, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="ResponsiveCancellable">
+                                    <Setter Property="Text" Value="UI thread is free and task CAN be cancelled, try dragging the window or click on any controls..." />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

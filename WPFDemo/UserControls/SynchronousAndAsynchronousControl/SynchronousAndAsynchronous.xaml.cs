@@ -85,12 +85,16 @@ namespace WPFDemo.UserControls.SynchronousAndAsynchronousControl
         {
             try
             {
-                SetApplicationState(ApplicationState.Responsive);
+                SetApplicationState(ApplicationState.ResponsiveCancellable);
                 ClearProgressBarValue();
                 StartTask();
 
                 for (var i = 0; i <= MaximumProgressBar; i++)
                 {
+                    // If your task reaches here before PerformIOTaskAsync, OperationCanceledException will be thrown.
+                    // Not necessary to have this if there is a CancellationToken defined in PerformIOTaskAsync,
+                    // but in case it taks a long time for your own code to execute before even reaching the framework code,
+                    // you might want to consider having this.
                     _cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
                     PrgsBr.Value += 1;
@@ -99,10 +103,12 @@ namespace WPFDemo.UserControls.SynchronousAndAsynchronousControl
             }
             catch (TaskCanceledException tcex)
             {
+                // When the framework IO operation cancels.
                 RefreshCancellationTokenSource();
             }
             catch (OperationCanceledException ocex)
             {
+                // When your behavioural code checks for cancellation.
                 RefreshCancellationTokenSource();
             }
             finally

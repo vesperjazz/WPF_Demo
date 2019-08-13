@@ -5,6 +5,7 @@
         Invalid,
         Default,
         NonResponsive,
-        Responsive
+        Responsive,
+        ResponsiveCancellable
     }
 }

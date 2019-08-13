@@ -9,24 +9,29 @@
         xmlns:sac="clr-namespace:WPFDemo.UserControls.SynchronousAndAsynchronousControl"
         xmlns:occ="clr-namespace:WPFDemo.UserControls.ObservableCollectionControl"
         mc:Ignorable="d"
-        Title="WPF Basic Demo" Height="600" Width="850" Background="Azure" ResizeMode="NoResize">
+        Title="WPF Basic Demo" Height="625" Width="850" Background="Azure" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <!-- Don't really need 2 columns here, but just to showcase how ColumnSpan works. -->
+            <ColumnDefinition Width="*"/> <!-- Column 0 -->
+            <ColumnDefinition Width="*"/> <!-- Column 1 -->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/> <!-- Row 0 -->
+            <RowDefinition Height="Auto"/> <!-- Row 1 -->
+            <RowDefinition Height="Auto"/> <!-- Row 2 -->
+            <RowDefinition Height="Auto"/> <!-- Row 3 -->
+            <RowDefinition Height="Auto"/> <!-- Row 4 -->
+            <RowDefinition Height="Auto"/> <!-- Row 5 -->
+            <RowDefinition Height="Auto"/> <!-- Row 6 -->
+            <RowDefinition Height="Auto"/> <!-- Row 7 -->
+            <RowDefinition Height="Auto"/> <!-- Row 8 -->
         </Grid.RowDefinitions>
         
-        <bbc:BasicBinding Grid.Row="0" Grid.ColumnSpan="2"
+        <!-- Self-defined UserControl -->
+        <!-- Can be used multiple times with just one definition, no copy paste. -->
+        <!-- Start at Row 0, Column 0 and takes up the space of 2 columns. -->
+        <bbc:BasicBinding Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource LabelledUserControl}"
                           UserControlTitle="{x:Static uc:UserControlInfo.BasicBinding}"
                           UserControlDescriptions="{x:Static uc:UserControlInfo.BasicBindingDescriptions}"
@@ -35,29 +40,38 @@
         <Separator Grid.Row="1" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 
-        <ccbc:CommandsAndCodeBehind Grid.Row="2" Grid.ColumnSpan="2"
+        <ccbc:CommandsAndCodeBehind Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                     Style="{StaticResource LabelledUserControl}"
                                     UserControlTitle="{x:Static uc:UserControlInfo.CommandsAndCodeBehind}"
                                     UserControlDescriptions="{x:Static uc:UserControlInfo.CommandsAndCodeBehindDescriptions}"
                                     DataContext="{Binding CommandsAndCodeBehindViewModel}"/>
-        <Separator Grid.Row="3" Grid.ColumnSpan="2" 
+        <Separator Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 
-        <occ:ObservableCollection Grid.Row="4" Grid.ColumnSpan="2"
+        <occ:ObservableCollection Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                                   Style="{StaticResource LabelledUserControl}"
                                   UserControlTitle="{x:Static uc:UserControlInfo.ObservableAndGenericCollection}"
                                   UserControlDescriptions="{x:Static uc:UserControlInfo.ObservableAndGenericCollectionDescriptions}"
                                   DataContext="{Binding ObservableCollectionViewModel}"/>
-        <Separator Grid.Row="5" Grid.ColumnSpan="2" 
+        <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 
         <!-- https://social.msdn.microsoft.com/Forums/vstudio/en-US/a430ab1f-b02f-40d1-ada4-b39f033cb3b4/binding-to-a-user-control-dependency-property?forum=wpf -->
-        <sac:SynchronousAndAsynchronous Grid.Row="6" Grid.ColumnSpan="2"
+        <sac:SynchronousAndAsynchronous Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                                         Style="{StaticResource LabelledUserControl}"
                                         UserControlTitle="{x:Static uc:UserControlInfo.SynchronousAndAsynchronous}"
                                         UserControlDescriptions="{x:Static uc:UserControlInfo.SynchronousAndAsynchronousDescriptions}"
                                         DataContext="{Binding SynchronousAndAsynchronousViewModel}"
                                         MaximumProgressBar="100"
                                         IsTaskCancellable="{Binding DataContext.Model.IsUserControlTaskCancellable, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}"/>
+        <Separator Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" 
+                   Margin="{StaticResource TopMarginSeparation}"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   Margin="{StaticResource TopMarginSeparation}"
+                   Text="Copyright © 2018 Ivan Chin. All Rights Reserved." />
     </Grid>
 </Window>

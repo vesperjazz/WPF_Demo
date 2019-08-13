@@ -2,6 +2,9 @@
 
 namespace WPFDemo.UserControls
 {
+    /// <summary>
+    /// Normally this would be in a resource file, but ommited in the case of this demo for brevity.
+    /// </summary>
     public static class UserControlInfo
     {
         public const string BasicBinding = "Basic Binding";
