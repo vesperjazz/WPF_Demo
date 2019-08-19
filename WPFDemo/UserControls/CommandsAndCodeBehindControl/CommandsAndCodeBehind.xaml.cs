@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using WPFDemo.Windows;
 
 namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
@@ -12,7 +13,32 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
     {
         private CommandsAndCodeBehindViewModel ViewModel => DataContext as CommandsAndCodeBehindViewModel;
 
-        public bool IsEnableButton => ViewModel?.UpdateFullInformationCanExecute(null) ?? false;
+        public bool IsEnableValidation
+        {
+            get { return (bool)GetValue(IsEnableValidationProperty); }
+            set { SetValue(IsEnableValidationProperty, value); }
+        }
+        public static readonly DependencyProperty IsEnableValidationProperty =
+            DependencyProperty.Register(nameof(IsEnableValidation), typeof(bool), typeof(CommandsAndCodeBehind),
+                new PropertyMetadata(true, OnIsEnableValidationPropertyChanged));
+
+        private static void OnIsEnableValidationPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            var thisUserControl = source as CommandsAndCodeBehind;
+            thisUserControl.IsEnableButton = !(bool)e.NewValue;
+            thisUserControl.ViewModel.PersonInfo.IsEnableValidation = !(bool)e.NewValue;
+        }
+
+        private bool _isEnableButton;
+        public bool IsEnableButton
+        {
+            get => _isEnableButton;
+            set
+            {
+                _isEnableButton = value;
+                UpdateUI();
+            }
+        }
 
         public CommandsAndCodeBehind()
         {
@@ -27,7 +53,8 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 
         private void PersonInfo_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            UpdateUI(nameof(IsEnableButton));
+            IsEnableButton = ViewModel?.UpdateFullInformationCanExecute(null) ?? false;
+            //UpdateUI(nameof(IsEnableButton));
         }
 
         // Code behind for the respective view must reside in the same 

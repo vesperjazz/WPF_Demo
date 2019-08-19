@@ -1,6 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary x:Class="WPFDemo.LocalResources.ResourceDictionary"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:usercontrols="clr-namespace:WPFDemo.UserControls">
+                    xmlns:usercontrols="clr-namespace:WPFDemo.UserControls"
+                    xmlns:windows="clr-namespace:WPFDemo.Windows">
     <!-- General separation between controls. -->
     <!-- The following statements are exactly the same. -->
     <!-- XAML has a fixed convention of Left,Top,Right,Bottom. -->
@@ -37,7 +39,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!-- Template can be shared across different styles. -->
     <!-- Line 33-60 is exactly the same as Line 62-97. -->
     <!--<ControlTemplate TargetType="usercontrols:UserControlBase" x:Key="UserControlBaseTemplate">
@@ -72,8 +74,8 @@
     <Style TargetType="{x:Type usercontrols:UserControlBase}" x:Key="LabelledUserControl">
         <Setter Property="Template">
             <Setter.Value>
-                 <!-- No warning will be given on missing target type, it will just be silent and not work! 
-                     Ridiculously annoying! --> 
+                <!-- No warning will be given on missing target type, it will just be silent and not work! 
+                     Ridiculously annoying! -->
                 <ControlTemplate TargetType="{x:Type usercontrols:UserControlBase}">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -104,5 +106,163 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="CustomWindowStyle" TargetType="{x:Type windows:CustomWindow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type windows:CustomWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="20">
+                        <Border.Effect>
+                            <DropShadowEffect x:Name="DropShadowEffect" Color="Gray" Direction="270" BlurRadius="20" ShadowDepth="3" />
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" 
+                                    Name="BdrTitleBar"
+                                    SnapsToDevicePixels="True">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="Blue"/>
+                                        <!--<EventSetter Event="MouseMove" Handler="Border_MouseMove"/>-->
+                                        <EventSetter Event="MouseDown" Handler="BdrTitleBar_MouseDown"/>
+                                    </Style>
+                                </Border.Style>
+                                <Grid>
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Foreground" Value="#ffffff"/>
+                                                <Setter Property="FontSize" Value="20"/>
+                                                <Setter Property="FontWeight" Value="Bold"/>
+                                                <Setter Property="FontFamily" Value="Calibri"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="Margin" Value="15,0"/>
+                                                <Setter Property="Text" Value="{Binding Path=Title, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                        <Button Name="BtnHide">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <!--<Setter Property="IsEnabled" Value="{Binding IsAllowMinimise, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}"/>-->
+                                                    <Setter Property="Visibility" Value="{Binding IsHideWindowVisible, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border x:Name="BrdContainer" Height="35" Width="35">
+                                                                    <Image Height="20" Width="20" 
+                                                                           VerticalAlignment="Center"
+                                                                           Source="/WPFDemo.Resources;Component/Images/Icn_Hide_24x24.png" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="BrdContainer" Property="Background" Value="#0084CC"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <EventSetter Event="Click" Handler="BtnHide_Click"/>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <!-- Error -->
+                                        <!--<Button Name="BtnMaximiseMinimise">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                --><!--<Border x:Name="BrdContainer" Height="35" Width="35">
+                                                                    <Image x:Name="ImgMinMax"
+                                                                           Height="20" Width="20" 
+                                                                           VerticalAlignment="Center"
+                                                                           Source="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png" />
+                                                                </Border>--><!--
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#0084CC"/>
+                                                                    </Trigger>
+                                                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Normal">
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="Button">
+                                                                                    <Border x:Name="BrdContainer" Height="35" Width="35">
+                                                                                        <Image x:Name="ImgMinMax"
+                                                                                               Height="20" Width="20" 
+                                                                                               VerticalAlignment="Center"
+                                                                                               Source="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png" />
+                                                                                    </Border>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </DataTrigger>
+                                                                    --><!--<DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Minimized">
+                                                                        <Setter TargetName="ImgMinMax" Property="Source" Value="/WPFDemo.Resources;Component/Images/Icn_Maximize_24x24.png"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Maximized">
+                                                                        <Setter TargetName="ImgMinMax" Property="Source" Value="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png"/>
+                                                                    </DataTrigger>--><!--
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    --><!--<EventSetter Event="Click" Handler=""/>--><!--
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>-->
+                                        <Button Name="BtnClose">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border x:Name="BrdContainer" Height="35" Width="35">
+                                                                    <Image Height="20" Width="20" 
+                                                                       VerticalAlignment="Center"
+                                                                       Source="/WPFDemo.Resources;Component/Images/Icn_Close_24x24.png" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="BrdContainer" Property="Background" Value="#0084CC"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <EventSetter Event="Click" Handler="BtnClose_Click"/>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <Grid Grid.Row="1" ClipToBounds="True">
+                                <ContentPresenter/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="Background" Value="Transparent" />
     </Style>
 </ResourceDictionary>

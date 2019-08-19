@@ -3,7 +3,12 @@ using System.Windows.Input;
 
 namespace WPFDemo
 {
-    public class RelayCommand : ICommand
+    public interface IRelayCommand : ICommand
+    {
+        void RaiseCanExecuteChanged();
+    }
+
+    public class RelayCommand : IRelayCommand
     {
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
@@ -13,12 +18,14 @@ namespace WPFDemo
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+        //public event EventHandler CanExecuteChanged;
 
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
+
 
         public bool CanExecute(object parameter)
         {
@@ -28,6 +35,11 @@ namespace WPFDemo
         public void Execute(object parameter)
         {
             _execute(parameter);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

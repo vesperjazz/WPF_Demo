@@ -64,6 +64,10 @@
     <Compile Include="Converters\ApplicationStateToMessageConverter.cs" />
     <Compile Include="Converters\DateTimeToAgeConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\MultiBooleanConverter.cs" />
+    <Compile Include="LocalResources\ResourceDictionary.xaml.cs">
+      <DependentUpon>ResourceDictionary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="UserControls\BasicBindingControl\BasicBinding.xaml.cs">
       <DependentUpon>BasicBinding.xaml</DependentUpon>
@@ -86,6 +90,7 @@
     <Compile Include="UserControls\SynchronousAndAsynchronousControl\SynchronousAndAsynchronousViewModel.cs" />
     <Compile Include="UserControls\UserControlBase.cs" />
     <Compile Include="UserControls\UserControlInfo.cs" />
+    <Compile Include="Windows\CustomWindow.cs" />
     <Compile Include="Windows\PersonInfoWindow.xaml.cs">
       <DependentUpon>PersonInfoWindow.xaml</DependentUpon>
     </Compile>

@@ -15,7 +15,9 @@ namespace WPFDemo.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return value is bool
+                ? !(bool)value
+                : (object)null;
         }
     }
 }

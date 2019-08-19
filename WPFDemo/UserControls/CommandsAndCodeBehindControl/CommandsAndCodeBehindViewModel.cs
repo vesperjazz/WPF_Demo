@@ -6,7 +6,7 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 {
     public class CommandsAndCodeBehindViewModel : NotifyPropertyChangedBase
     {
-        public ICommand UpdateFullInformationCommand { get; }
+        public IRelayCommand UpdateFullInformationCommand { get; }
 
         public PersonInfo PersonInfo { get; }
 
@@ -26,7 +26,7 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 
         public bool UpdateFullInformationCanExecute(object param)
         {
-            return PersonInfo.IsReady;
+            return PersonInfo.IsEnableValidation;
         }
     }
 }

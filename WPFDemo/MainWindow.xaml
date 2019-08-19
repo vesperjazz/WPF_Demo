@@ -30,6 +30,7 @@
         <!-- Can be used multiple times with just one definition, no copy paste. -->
         <!-- Start at Row 0, Column 0 and takes up the space of 2 columns. -->
         <bbc:BasicBinding Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                          x:Name="BasicBindingUC"
                           Style="{StaticResource LabelledUserControl}"
                           UserControlTitle="{x:Static uc:UserControlInfo.BasicBinding}"
                           UserControlDescriptions="{x:Static uc:UserControlInfo.BasicBindingDescriptions}"
@@ -42,7 +43,8 @@
                                     Style="{StaticResource LabelledUserControl}"
                                     UserControlTitle="{x:Static uc:UserControlInfo.CommandsAndCodeBehind}"
                                     UserControlDescriptions="{x:Static uc:UserControlInfo.CommandsAndCodeBehindDescriptions}"
-                                    DataContext="{Binding CommandsAndCodeBehindViewModel}"/>
+                                    DataContext="{Binding CommandsAndCodeBehindViewModel}"
+                                    IsEnableValidation="{Binding IsEnableValidation, ElementName=BasicBindingUC, UpdateSourceTrigger=PropertyChanged}"/>
         <Separator Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 

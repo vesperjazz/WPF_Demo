@@ -23,7 +23,7 @@ namespace WPFDemo
 
         public MainWindowModel()
         {
-            PersonInfo = new PersonInfo();
+            PersonInfo = new PersonInfo { IsEnableValidation = true };
             PersonInfoList = new List<PersonInfo>
             {
                 new PersonInfo { FirstName = "Aragorn", LastName = "Elessar", SelectedGender = "Male", SelectedJob = new Job { Description = "King of Gondor" } },

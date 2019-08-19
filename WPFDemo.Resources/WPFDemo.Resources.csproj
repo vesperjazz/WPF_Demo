@@ -91,5 +91,11 @@
   <ItemGroup>
     <Resource Include="Images\Help_24.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icn_Close_24x24.png" />
+    <Resource Include="Images\Icn_Hide_24x24.png" />
+    <Resource Include="Images\Icn_Maximize_24x24.png" />
+    <Resource Include="Images\Icn_Minimize_24x24.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

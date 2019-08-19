@@ -6,6 +6,8 @@
                               xmlns:local="clr-namespace:WPFDemo"
                               xmlns:sys="clr-namespace:System;assembly=mscorlib"
                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:customcontrols="clr-namespace:WPFDemo.CustomControls;assembly=WPFDemo.CustomControls"
+                              xmlns:converters="clr-namespace:WPFDemo.Converters"
                               mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Resources>
@@ -32,6 +34,9 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
+            <converters:MultiBooleanConverter x:Key="MultiBooleanConverter"/>
+            <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="86"/>
@@ -108,7 +113,7 @@
                   ItemsSource="{x:Static local:CodeTables.Genders}"
                   SelectedItem="{Binding SelectedGender}"/>
         <Label Grid.Row="2" Grid.Column="3" 
-               Content="Job: "
+               Content="Job: " 
                Margin="{StaticResource TopMarginSeparation}"/>
         <!-- Complex object binding, e.g. a list of objects with multiple properties per object. -->
         <!-- SelectedValuePath tells the ComboBox control which property to pick within the Job object. -->
@@ -123,7 +128,8 @@
                   SelectedValue="{Binding SelectedJobID}"/>
 
         <Label Grid.Row="3" Grid.Column="0"
-               Content="Date of Birth: "
+               Content="Date of Birth: " 
+               VerticalAlignment="Center"
                Margin="{StaticResource TopMarginSeparation}"/>
         <DatePicker Grid.Row="3" Grid.Column="1" 
                     SelectedDate="{Binding DateOfBirth}"
@@ -148,11 +154,27 @@
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
-        <Button Grid.Row="3" Grid.Column="4"
-                Name="BtnAddPersonToTable"
-                Margin="{StaticResource TopMarginSeparation}"
-                IsEnabled="{Binding IsReady, Mode=OneWay}"
-                Content="Add Person to Table"
-                Click="BtnAddPersonToTable_Click"/>
+        
+        <Label Grid.Row="3" Grid.Column="3" 
+               Content="Validation: " 
+               VerticalAlignment="Center"
+               Margin="{StaticResource TopMarginSeparation}"/>
+        <DockPanel Grid.Row="3" Grid.Column="4">
+            <customcontrols:ToggleSlider Name="ValidationTS" Width="40" Margin="0,6,0,0" 
+                                         IsChecked="{Binding IsEnableValidation, Converter={StaticResource InverseBooleanConverter} , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Name="BtnAddPersonToTable" 
+                    Margin="{StaticResource LeftTopMarginSeparation}"
+                    Content="Add Person to Table"
+                    Click="BtnAddPersonToTable_Click">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource MultiBooleanConverter}">
+                        <Binding Path="IsMinimumInformationEntered"/>
+                        <!--<Binding ElementName="ValidationTS" Path="IsChecked"/>-->
+                        <Binding Path="IsEnableValidation"/>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+        </DockPanel>
+        
     </Grid>
 </usercontrols:UserControlBase>

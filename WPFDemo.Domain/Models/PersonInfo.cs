@@ -16,7 +16,7 @@ namespace WPFDemo.Domain.Models
             {
                 _firstName = value;
                 UpdateUI();
-                UpdateUI(nameof(IsReady));
+                UpdateUI(nameof(IsMinimumInformationEntered));
             }
         }
 
@@ -28,9 +28,11 @@ namespace WPFDemo.Domain.Models
             {
                 _lastName = value;
                 UpdateUI();
-                UpdateUI(nameof(IsReady));
+                UpdateUI(nameof(IsMinimumInformationEntered));
             }
         }
+
+        public bool IsMinimumInformationEntered => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName);
 
         public DateTime? DateOfBirth { get; set; }
 
@@ -97,6 +99,15 @@ namespace WPFDemo.Domain.Models
             }
         }
 
-        public bool IsReady => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName);
+        private bool _isEnableValidation;
+        public bool IsEnableValidation
+        {
+            get => _isEnableValidation;
+            set
+            {
+                _isEnableValidation = value;
+                UpdateUI();
+            }
+        }
     }
 }
