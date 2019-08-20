@@ -9,7 +9,7 @@
         xmlns:sac="clr-namespace:WPFDemo.UserControls.SynchronousAndAsynchronousControl"
         xmlns:occ="clr-namespace:WPFDemo.UserControls.ObservableCollectionControl"
         mc:Ignorable="d"
-        Title="WPF Basic Demo" Height="625" Width="850" Background="Azure" ResizeMode="NoResize">
+        Title="WPF Basic Demo" Height="630" Width="850" Background="Azure" ResizeMode="NoResize">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <!-- Don't really need 2 columns here, but just to showcase how ColumnSpan works. -->
@@ -43,8 +43,7 @@
                                     Style="{StaticResource LabelledUserControl}"
                                     UserControlTitle="{x:Static uc:UserControlInfo.CommandsAndCodeBehind}"
                                     UserControlDescriptions="{x:Static uc:UserControlInfo.CommandsAndCodeBehindDescriptions}"
-                                    DataContext="{Binding CommandsAndCodeBehindViewModel}"
-                                    IsEnableValidation="{Binding IsEnableValidation, ElementName=BasicBindingUC, UpdateSourceTrigger=PropertyChanged}"/>
+                                    DataContext="{Binding CommandsAndCodeBehindViewModel}"/>
         <Separator Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
                    Margin="{StaticResource TopMarginSeparation}"/>
 

@@ -91,6 +91,9 @@
     <Compile Include="UserControls\UserControlBase.cs" />
     <Compile Include="UserControls\UserControlInfo.cs" />
     <Compile Include="Windows\CustomWindow.cs" />
+    <Compile Include="Windows\PersonInfoCustomWindow.xaml.cs">
+      <DependentUpon>PersonInfoCustomWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PersonInfoWindow.xaml.cs">
       <DependentUpon>PersonInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\SynchronousAndAsynchronousControl\SynchronousAndAsynchronous.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PersonInfoCustomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

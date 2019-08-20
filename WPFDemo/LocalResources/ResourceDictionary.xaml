@@ -129,7 +129,7 @@
                                     SnapsToDevicePixels="True">
                                 <Border.Style>
                                     <Style TargetType="Border">
-                                        <Setter Property="Background" Value="Blue"/>
+                                        <Setter Property="Background" Value="Teal"/>
                                         <!--<EventSetter Event="MouseMove" Handler="Border_MouseMove"/>-->
                                         <EventSetter Event="MouseDown" Handler="BdrTitleBar_MouseDown"/>
                                     </Style>
@@ -263,6 +263,6 @@
         <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="Cyan" />
     </Style>
 </ResourceDictionary>

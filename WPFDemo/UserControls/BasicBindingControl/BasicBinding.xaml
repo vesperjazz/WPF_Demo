@@ -160,8 +160,9 @@
                VerticalAlignment="Center"
                Margin="{StaticResource TopMarginSeparation}"/>
         <DockPanel Grid.Row="3" Grid.Column="4">
-            <customcontrols:ToggleSlider Name="ValidationTS" Width="40" Margin="0,6,0,0" 
-                                         IsChecked="{Binding IsEnableValidation, Converter={StaticResource InverseBooleanConverter} , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <customcontrols:ToggleSlider Name="ValidationTS" 
+                                         Width="40" Margin="0,6,0,0" 
+                                         IsChecked="{Binding IsEnableValidation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Name="BtnAddPersonToTable" 
                     Margin="{StaticResource LeftTopMarginSeparation}"
                     Content="Add Person to Table"

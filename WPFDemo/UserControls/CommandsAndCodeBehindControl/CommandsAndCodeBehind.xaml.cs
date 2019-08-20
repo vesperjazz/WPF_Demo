@@ -13,21 +13,21 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
     {
         private CommandsAndCodeBehindViewModel ViewModel => DataContext as CommandsAndCodeBehindViewModel;
 
-        public bool IsEnableValidation
-        {
-            get { return (bool)GetValue(IsEnableValidationProperty); }
-            set { SetValue(IsEnableValidationProperty, value); }
-        }
-        public static readonly DependencyProperty IsEnableValidationProperty =
-            DependencyProperty.Register(nameof(IsEnableValidation), typeof(bool), typeof(CommandsAndCodeBehind),
-                new PropertyMetadata(true, OnIsEnableValidationPropertyChanged));
+        //public bool IsEnableValidation
+        //{
+        //    get { return (bool)GetValue(IsEnableValidationProperty); }
+        //    set { SetValue(IsEnableValidationProperty, value); }
+        //}
+        //public static readonly DependencyProperty IsEnableValidationProperty =
+        //    DependencyProperty.Register(nameof(IsEnableValidation), typeof(bool), typeof(CommandsAndCodeBehind),
+        //        new PropertyMetadata(true, OnIsEnableValidationPropertyChanged));
 
-        private static void OnIsEnableValidationPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
-        {
-            var thisUserControl = source as CommandsAndCodeBehind;
-            thisUserControl.IsEnableButton = !(bool)e.NewValue;
-            thisUserControl.ViewModel.PersonInfo.IsEnableValidation = !(bool)e.NewValue;
-        }
+        //private static void OnIsEnableValidationPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        //{
+        //    var thisUserControl = source as CommandsAndCodeBehind;
+        //    thisUserControl.IsEnableButton = !(bool)e.NewValue;
+        //    thisUserControl.ViewModel.PersonInfo.IsEnableValidation = !(bool)e.NewValue;
+        //}
 
         private bool _isEnableButton;
         public bool IsEnableButton
@@ -54,7 +54,6 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
         private void PersonInfo_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             IsEnableButton = ViewModel?.UpdateFullInformationCanExecute(null) ?? false;
-            //UpdateUI(nameof(IsEnableButton));
         }
 
         // Code behind for the respective view must reside in the same 
@@ -95,6 +94,13 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 
             // Can only be opened once and focus cannot leave this particular dialog until closure.
             personInfoWindow.ShowDialog();
+        }
+
+        private void BtnOpenCustomWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var personInfoCustomWindow = new PersonInfoCustomWindow(ViewModel.PersonInfo);
+
+            personInfoCustomWindow.Show();
         }
     }
 }

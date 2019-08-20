@@ -1,0 +1,17 @@
+﻿<local:CustomWindow x:Class="WPFDemo.Windows.PersonInfoCustomWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:WPFDemo.Windows"
+                    xmlns:pidc="clr-namespace:WPFDemo.UserControls.PersonInfoDisplayControl"
+                    mc:Ignorable="d"
+                    Style="{StaticResource CustomWindowStyle}"
+                    Title="Person Info Custom Window" Height="150" Width="450"
+                    IsHideWindowVisible="Visible">
+    <Grid Margin="10">
+        <Border BorderBrush="Teal" BorderThickness="1">
+            <pidc:PersonInfoDisplay/>
+        </Border>
+    </Grid>
+</local:CustomWindow>

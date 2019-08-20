@@ -16,6 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <pidc:PersonInfoDisplay Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" 
@@ -47,5 +48,12 @@
                 IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Content="Open Dialog"
                 Click="BtnOpenDialog_Click"/>
+
+        <Button Grid.Row="2" Grid.Column="2" 
+                Margin="{StaticResource TopMarginSeparation}"
+                Name="BtnOpenCustomWindow"
+                IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="Open Custom Window"
+                Click="BtnOpenCustomWindow_Click"/>
     </Grid>
 </usercontrols:UserControlBase>

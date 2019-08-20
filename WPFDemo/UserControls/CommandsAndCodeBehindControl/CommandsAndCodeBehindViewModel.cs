@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
 using WPFDemo.Domain.Models;
 
 namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
@@ -26,7 +25,7 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 
         public bool UpdateFullInformationCanExecute(object param)
         {
-            return PersonInfo.IsEnableValidation;
+            return PersonInfo.IsMinimumInformationEntered || !PersonInfo.IsEnableValidation;
         }
     }
 }
