@@ -8,7 +8,8 @@
                     mc:Ignorable="d"
                     Style="{StaticResource CustomWindowStyle}"
                     Title="Person Info Custom Window" Height="150" Width="450"
-                    IsHideWindowVisible="Visible">
+                    IsHideWindowVisible="Visible"
+                    IsMaximiseMinimiseVisible="Visible">
     <Grid Margin="10">
         <Border BorderBrush="Teal" BorderThickness="1">
             <pidc:PersonInfoDisplay/>

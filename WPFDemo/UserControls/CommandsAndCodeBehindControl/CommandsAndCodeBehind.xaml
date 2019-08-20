@@ -55,5 +55,12 @@
                 IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
                 Content="Open Custom Window"
                 Click="BtnOpenCustomWindow_Click"/>
+        
+        <Button Grid.Row="2" Grid.Column="3" 
+                Margin="{StaticResource LeftTopMarginSeparation}"
+                Name="BtnOpenCustomDialog"
+                IsEnabled="{Binding IsEnableButton, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Content="Open Custom Dialog"
+                Click="BtnOpenCustomDialog_Click"/>
     </Grid>
 </usercontrols:UserControlBase>

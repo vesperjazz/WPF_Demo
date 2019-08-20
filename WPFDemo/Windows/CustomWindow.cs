@@ -19,7 +19,7 @@ namespace WPFDemo.Windows
             set { SetValue(IsHideWindowVisibleProperty, value); }
         }
         public static readonly DependencyProperty IsHideWindowVisibleProperty =
-            DependencyProperty.Register("IsHideWindowVisible", typeof(Visibility), typeof(CustomWindow), 
+            DependencyProperty.Register(nameof(IsHideWindowVisible), typeof(Visibility), typeof(CustomWindow), 
                 new PropertyMetadata(Visibility.Collapsed));
 
         public Visibility IsMaximiseMinimiseVisible
@@ -28,10 +28,8 @@ namespace WPFDemo.Windows
             set { SetValue(IsMaximiseMinimiseVisibleProperty, value); }
         }
         public static readonly DependencyProperty IsMaximiseMinimiseVisibleProperty =
-            DependencyProperty.Register("IsMaximiseMinimiseVisible", typeof(Visibility), typeof(CustomWindow), 
+            DependencyProperty.Register(nameof(IsMaximiseMinimiseVisible), typeof(Visibility), typeof(CustomWindow), 
                 new PropertyMetadata(Visibility.Collapsed));
-
-
 
         private const string DropShadowEffect = "DropShadowEffect";
         private DropShadowEffect _WindowDropShadowEffect;

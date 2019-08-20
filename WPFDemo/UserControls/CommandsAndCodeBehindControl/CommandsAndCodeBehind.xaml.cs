@@ -102,5 +102,16 @@ namespace WPFDemo.UserControls.CommandsAndCodeBehindControl
 
             personInfoCustomWindow.Show();
         }
+
+        private void BtnOpenCustomDialog_Click(object sender, RoutedEventArgs e)
+        {
+            var personInfoCustomWindow = new PersonInfoCustomWindow(ViewModel.PersonInfo)
+            {
+                Owner = Window.GetWindow(this),
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            personInfoCustomWindow.ShowDialog();
+        }
     }
 }

@@ -115,7 +115,8 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="20">
+                            Margin="20"
+                            SizeChanged="Border_SizeChanged">
                         <Border.Effect>
                             <DropShadowEffect x:Name="DropShadowEffect" Color="Gray" Direction="270" BlurRadius="20" ShadowDepth="3" />
                         </Border.Effect>
@@ -152,7 +153,6 @@
                                         <Button Name="BtnHide">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
-                                                    <!--<Setter Property="IsEnabled" Value="{Binding IsAllowMinimise, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}"/>-->
                                                     <Setter Property="Visibility" Value="{Binding IsHideWindowVisible, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}"/>
                                                     <Setter Property="VerticalAlignment" Value="Center"/>
                                                     <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -177,52 +177,45 @@
                                             </Button.Style>
                                         </Button>
                                         <!-- Error -->
-                                        <!--<Button Name="BtnMaximiseMinimise">
+                                        <Button Name="BtnMaximiseMinimise">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Visibility" Value="{Binding IsMaximiseMinimiseVisible, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}"/>
                                                     <Setter Property="VerticalAlignment" Value="Center"/>
                                                     <Setter Property="HorizontalAlignment" Value="Right"/>
                                                     <Setter Property="Template">
                                                         <Setter.Value>
                                                             <ControlTemplate TargetType="Button">
-                                                                --><!--<Border x:Name="BrdContainer" Height="35" Width="35">
+                                                                <Border x:Name="BrdContainer" Height="35" Width="35">
                                                                     <Image x:Name="ImgMinMax"
                                                                            Height="20" Width="20" 
-                                                                           VerticalAlignment="Center"
-                                                                           Source="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png" />
-                                                                </Border>--><!--
+                                                                           VerticalAlignment="Center">
+                                                                        <Image.Style>
+                                                                            <Style TargetType="Image">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Normal">
+                                                                                        <Setter Property="Source" Value="/WPFDemo.Resources;Component/Images/Icn_Maximize_24x24.png"/>
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Maximized">
+                                                                                        <Setter Property="Source" Value="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png"/>
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Image.Style>
+                                                                    </Image>
+                                                                </Border>
                                                                 <ControlTemplate.Triggers>
                                                                     <Trigger Property="IsMouseOver" Value="True">
                                                                         <Setter Property="Background" Value="#0084CC"/>
                                                                     </Trigger>
-                                                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Normal">
-                                                                        <Setter Property="Template">
-                                                                            <Setter.Value>
-                                                                                <ControlTemplate TargetType="Button">
-                                                                                    <Border x:Name="BrdContainer" Height="35" Width="35">
-                                                                                        <Image x:Name="ImgMinMax"
-                                                                                               Height="20" Width="20" 
-                                                                                               VerticalAlignment="Center"
-                                                                                               Source="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png" />
-                                                                                    </Border>
-                                                                                </ControlTemplate>
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                    </DataTrigger>
-                                                                    --><!--<DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Minimized">
-                                                                        <Setter TargetName="ImgMinMax" Property="Source" Value="/WPFDemo.Resources;Component/Images/Icn_Maximize_24x24.png"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=windows:CustomWindow}}" Value="Maximized">
-                                                                        <Setter TargetName="ImgMinMax" Property="Source" Value="/WPFDemo.Resources;Component/Images/Icn_Minimize_24x24.png"/>
-                                                                    </DataTrigger>--><!--
                                                                 </ControlTemplate.Triggers>
                                                             </ControlTemplate>
                                                         </Setter.Value>
                                                     </Setter>
-                                                    --><!--<EventSetter Event="Click" Handler=""/>--><!--
+                                                    <EventSetter Event="Click" Handler="BtnMaximiseMinimise_Click"/>
                                                 </Style>
                                             </Button.Style>
-                                        </Button>-->
+                                        </Button>
                                         <Button Name="BtnClose">
                                             <Button.Style>
                                                 <Style TargetType="{x:Type Button}">
