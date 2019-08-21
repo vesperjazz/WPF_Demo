@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace WPFDemo.LocalResources
 {
-    public partial class ResourceDictionary
+    public partial class CustomWindowResourceDictionary
     {
         private Window GetCurrentWindow(object sender)
         {
@@ -29,8 +29,8 @@ namespace WPFDemo.LocalResources
         private void BtnMaximiseMinimise_Click(object sender, RoutedEventArgs e)
         {
             var currentSenderWindow = GetCurrentWindow(sender);
-            currentSenderWindow.WindowState = currentSenderWindow.WindowState == WindowState.Normal 
-                ? WindowState.Maximized 
+            currentSenderWindow.WindowState = currentSenderWindow.WindowState == WindowState.Normal
+                ? WindowState.Maximized
                 : WindowState.Normal;
         }
 
@@ -45,7 +45,7 @@ namespace WPFDemo.LocalResources
 
             var isSizeIncreased = e.NewSize.Width > e.PreviousSize.Width && e.NewSize.Height > e.PreviousSize.Height;
             border.Margin = isSizeIncreased
-                ? _maximisedBorderMargin 
+                ? _maximisedBorderMargin
                 : _originalBorderMargin;
         }
     }

@@ -65,8 +65,8 @@
     <Compile Include="Converters\DateTimeToAgeConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\MultiBooleanConverter.cs" />
-    <Compile Include="LocalResources\ResourceDictionary.xaml.cs">
-      <DependentUpon>ResourceDictionary.xaml</DependentUpon>
+    <Compile Include="LocalResources\CustomWindowResourceDictionary.xaml.cs">
+      <DependentUpon>CustomWindowResourceDictionary.xaml</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="UserControls\BasicBindingControl\BasicBinding.xaml.cs">
@@ -97,6 +97,10 @@
     <Compile Include="Windows\PersonInfoWindow.xaml.cs">
       <DependentUpon>PersonInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="LocalResources\CustomWindowResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

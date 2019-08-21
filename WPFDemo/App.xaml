@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="LocalResources/ResourceDictionary.xaml"/>
+                <ResourceDictionary Source="LocalResources/CustomWindowResourceDictionary.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFDemo.Resources;component/GeneralResourceDictionary.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFDemo.Resources;component/ButtonResourceDictionary.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFDemo.Resources;component/DataGridResourceDictionary.xaml"/>
